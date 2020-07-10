@@ -2,13 +2,64 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width " />
-    <title>URL Shortener</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>url shortener</title>
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   </head>
   <body>
     <header>
-      <h1>URL Shortener</h1>
+      <h1>url shortener</h1>
     </header>
+    <main id="app">
+      <form class="form" v-if="formVisible" @submit.prevent="createURL()">
+        <div v-if="error" class="error">{{error}}</div>
+
+        <input
+          class="input"
+          type="text"
+          v-model="url"
+          name="url"
+          id="url"
+          placeholder="enter a url"
+        />
+        <input
+          class="input"
+          type="text"
+          v-model="slug"
+          name="slug"
+          id="slug"
+          placeholder="enter a slug"
+        />
+
+        <button type="submit" class="create">create</button>
+      </form>
+      <div v-if="created">
+        <p class="created">
+          Your short url is: <a :href="created">{{created}}</a>
+        </p>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
   </body>
 </html>

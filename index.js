@@ -10,13 +10,10 @@ const URL = require('./model/URL');
 
 require('dotenv').config();
 
-mongoose.connect(
-  'mongodb+srv://pmarcosfelipe:s1f65v9200@cluster0.1uym1.mongodb.net/url-shortener?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const app = express();
 
@@ -72,7 +69,7 @@ app.get('/:slug', async (request, response) => {
     if (url) {
       response.redirect(url.url);
     }
-    response.redirect(`/?error=${slug} not found`);
+    // response.redirect(`/?error=${slug} not found`);
   } catch (error) {
     response.redirect(`/?error=Link not found`);
   }
